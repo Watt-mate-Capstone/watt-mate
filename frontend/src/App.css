@@ -1,0 +1,510 @@
+/* 전체 */
+* {
+  box-sizing: border-box;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: #f5f7fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* 로그인 부분 */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background-color: #ffffff;
+  padding-top: 20vh;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #333333;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.title-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.main-title {
+  font-size: 42px;
+  font-weight: 800;
+  color: #000000;
+  margin: 0;
+  letter-spacing: -1.5px;
+}
+
+.form-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 17px 20px;
+  font-size: 17px;
+  border: 1px solid #555555;
+  border-radius: 20px;
+  background-color: #FAFAFA;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-field::placeholder {
+  color: #777777;
+}
+
+.login-button {
+  width: 100%;
+  padding: 18px 20px;
+  margin-top: 1px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #222222;
+  background-color: #B4C6B6;
+  border: 1px solid #555555;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.login-button:hover {
+  background-color: #a0b3a2;
+}
+
+/* 메인 & 마이페이지 */
+header {
+  background: #ffffff;
+  padding: 1.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  zoom: 0.7;
+}
+
+header h2 {
+  margin: 0;
+  color: #000000;
+  font-weight: 800;
+  font-size: 28px;
+  letter-spacing: -1px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-links a, 
+.nav-links span {
+  font-size: 18px;
+  color: #555;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.nav-links a:hover, 
+.nav-links span:hover {
+  color: #000;
+  font-weight: bold;
+}
+
+.profile-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-icon {
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+.profile-icon:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 55px;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  border: 1px solid #eaeaea;
+  z-index: 1001;
+  overflow: hidden;
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-menu a, .dropdown-menu span {
+  display: block;
+  padding: 16px 24px;
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.dropdown-menu a:hover, .dropdown-menu span:hover {
+  background-color: #f5f7fa;
+  color: #B4C6B6;
+  font-weight: 700;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 120px auto 4rem auto;
+  padding: 0 2rem;
+  zoom: 0.7
+}
+
+.card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 30px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  border: 1px solid #eaeaea;
+}
+
+.card h3 {
+  font-size: 24px;
+  color: #222;
+  margin-top: 0;
+  margin-bottom: 30px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 메인 */
+.banner {
+  background: linear-gradient(135deg, #B4C6B6 0%, #8a9e8c 100%);
+  border-radius: 30px;
+  padding: 4rem 3rem;
+  color: white;
+  margin-bottom: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(180, 198, 182, 0.3);
+}
+
+.banner h1 {
+  margin: 0 0 15px 0;
+  font-size: 40px;
+  font-weight: 900;
+}
+
+.banner p {
+  margin: 0;
+  font-size: 22px;
+  opacity: 0.95;
+}
+
+.main-grid {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.main-grid .card {
+  min-height: 550px;
+}
+
+.main-grid h3 {
+  font-size: 32px;
+  padding-bottom: 15px;
+  display: inline-block;
+}
+
+.tip-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tip-list li {
+  padding: 30px;
+  transition: 0.2s;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.tip-list li:hover {
+  background-color: #f9fbf9;
+}
+
+.tip-title {
+  font-weight: 800;
+  color: #333;
+  margin-bottom: 15px;
+  display: block;
+  font-size: 28px;
+}
+
+.tip-desc {
+  font-size: 22px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.hof-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hof-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 0;
+}
+
+.hof-rank {
+  font-weight: 900;
+  color: #B4C6B6;
+  width: 45px;
+  font-size: 32px;
+}
+
+.hof-name {
+  font-weight: 700;
+  color: #444;
+  flex-grow: 1;
+  margin-left: 20px;
+  font-size: 26px;
+}
+
+.hof-score {
+  font-size: 22px;
+  color: #666;
+  background: #f5f5f5;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 700;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.summary-grid .card {
+  padding: 2.5rem;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.summary-grid .value {
+  font-size: 42px;
+  font-weight: 900;
+  color: #222;
+  margin-top: 15px;
+}
+
+.summary-grid .unit {
+  font-size: 22px;
+  color: #888;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.chart-section {
+  margin-bottom: 2rem;
+}
+
+.chart-section h3 {
+  font-size: 32px;
+}
+
+.chart-placeholder {
+  width: 100%;
+  height: 450px;
+  background: #FAFAFA;
+  border: 1px dashed #cccccc;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  margin-top: 25px;
+  font-size: 24px;
+}
+
+.ai-tip {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  padding: 2rem;
+  border-radius: 20px;
+  margin-top: 2rem;
+  font-size: 22px;
+  color: #166534;
+  line-height: 1.6;
+}
+
+.ai-tip strong {
+  font-weight: 800;
+  font-size: 24px;
+}
+
+/* 마이페이지 */
+.page-title {
+  font-size: 40px;
+  font-weight: 900;
+  margin-bottom: 40px;
+  color: #222;
+}
+
+.mypage-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.mypage-grid .card {
+  min-height: 600px;
+}
+
+.mypage-grid .card h3 {
+  font-size: 32px;
+  margin-bottom: 35px;
+  padding-bottom: 15px;
+  display: inline-block;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 25px 0;
+}
+
+.info-label {
+  color: #777;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.info-value {
+  color: #222;
+  font-weight: 800;
+  font-size: 24px;
+}
+
+.profile-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.profile-img-circle {
+  width: 150px;
+  height: 150px;
+  background-color: #f0f4f1;
+  border-radius: 50%;
+  margin: 0 auto 25px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 70px;
+}
+
+.user-name {
+  font-size: 36px;
+  font-weight: 900;
+  color: #111;
+}
+
+.user-role {
+  color: #888;
+  font-size: 20px;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.btn {
+  display: inline-block;
+  padding: 22px 30px;
+  background-color: #B4C6B6;
+  color: #222;
+  font-weight: 800;
+  text-decoration: none;
+  border-radius: 18px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  margin-top: 30px;
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 22px;
+}
+
+.btn:hover {
+  background-color: #a0b3a2;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: #f5f5f5;
+  color: #555;
+  margin-top: 25px;
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
