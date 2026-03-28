@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "homepage": "https://watt-mate-capstone.github.io/watt-mate",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
