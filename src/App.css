@@ -9,7 +9,6 @@ body {
   background-color: #f5f7fa;
   color: #333;
   line-height: 1.6;
-  zoom: 0.7;
 }
 
 /* 로그인 부분 */
@@ -114,6 +113,7 @@ header {
   top: 0;
   width: 100%;
   z-index: 1000;
+  zoom: 0.7;
 }
 
 header h2 {
@@ -202,6 +202,7 @@ header h2 {
   max-width: 1400px;
   margin: 120px auto 4rem auto;
   padding: 0 2rem;
+  zoom: 0.7
 }
 
 .card {
