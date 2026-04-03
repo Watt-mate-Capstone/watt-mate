@@ -1,0 +1,12 @@
+services:
+  app:
+    image: node:22-alpine
+    volumes:
+      - .:/app
+      - /app/node_modules # 중요: 도커 전용 패키지 저장 공간 생성
+    working_dir: /app
+    ports:
+      - "5173:5173"
+    # 실행 전 npm install을 먼저 수행하도록 명령어 변경
+    # docker-compose.yml 방식
+    command: sh -c "npm install && npm run dev -- --host"
