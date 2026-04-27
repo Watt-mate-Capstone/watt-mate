@@ -263,6 +263,55 @@
   font-weight: 700;
 }
 
+/* 현재 위치 기반 동네 선택 영역 */
+.signupform-region-box {
+  margin-top: 18px;
+  padding: 18px;
+  border: 1px solid #d9e8df;
+  border-radius: 18px;
+  background: #ffffff;
+}
+
+.signupform-region-title {
+  margin: 0 0 14px;
+  color: #7a8791;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.signupform-region-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.signupform-region-item {
+  width: 100%;
+  padding: 14px 12px;
+  border: none;
+  border-radius: 12px;
+  background: #f7faf8;
+  color: #1f2d25;
+  font-size: 17px;
+  font-weight: 800;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.signupform-region-item:hover {
+  background: #e9fff2;
+  transform: translateX(2px);
+}
+
+.signupform-region-item.active {
+  background: #22c55e;
+  color: #ffffff;
+}
+
 .signupform-group input[type="file"] {
   height: auto;
   padding: 14px 16px;
@@ -427,4 +476,60 @@
   .signupform-map {
     height: 320px;
   }
+
+  .signupform-region-list {
+    max-height: 240px;
+  }
+
+  .signupform-region-item {
+    font-size: 16px;
+  }
+}
+
+.signupform-region-box {
+  margin-top: 18px;
+  padding: 18px;
+  border: 1px solid #d9e8df;
+  border-radius: 18px;
+  background: #ffffff;
+}
+
+.signupform-region-title {
+  margin: 0 0 14px;
+  color: #7a8791;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.signupform-region-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.signupform-region-item {
+  width: 100%;
+  padding: 14px 12px;
+  border: none;
+  border-radius: 12px;
+  background: #f7faf8;
+  color: #1f2d25;
+  font-size: 17px;
+  font-weight: 800;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.signupform-region-item:hover {
+  background: #e9fff2;
+  transform: translateX(2px);
+}
+
+.signupform-region-item.active {
+  background: #22c55e;
+  color: #ffffff;
 }

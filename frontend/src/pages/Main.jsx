@@ -1,5 +1,6 @@
 // 2. 메인페이지
 import React, { useState, useEffect } from 'react';
+import '../css/Main.css';
 
 const Main = ({ onNavigate }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

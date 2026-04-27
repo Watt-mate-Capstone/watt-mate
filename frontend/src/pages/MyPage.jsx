@@ -1,5 +1,6 @@
 // 3. 마이페이지
 import React from 'react';
+import '../css/MyPage.css';
 
 const MyPage = ({ onNavigate }) => {
   const handleLogout = () => {
