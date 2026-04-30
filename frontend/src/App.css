@@ -1,0 +1,12 @@
+/* 전체 */
+* {
+  box-sizing: border-box;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: #f5f7fa;
+  color: #333;
+  line-height: 1.6;
+}
