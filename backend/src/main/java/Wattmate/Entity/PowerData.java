@@ -13,7 +13,7 @@ public class PowerData {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private static User user;
 
     @Column(name = "real_usage_kwh", nullable = false)
     private Float realUsageKwh;
@@ -29,7 +29,7 @@ public class PowerData {
     public Integer getDataId() { return dataId; }
     public void setDataId(Integer dataId) { this.dataId = dataId; }
 
-    public User getUser() { return user; }
+    public static User getUser() { return user; }
     public void setUser(User user) { this.user = user; }
 
     public Float getRealUsageKwh() { return realUsageKwh; }
