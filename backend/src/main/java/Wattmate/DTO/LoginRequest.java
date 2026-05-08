@@ -2,9 +2,9 @@ package Wattmate.DTO;
 
 public class LoginRequest {
 
-    private String username;
+    private String nickname;
     private String password;
 
-    public String getUsername() { return username; }
+    public String getUsername() { return nickname; }
     public String getPassword() { return password; }
 }

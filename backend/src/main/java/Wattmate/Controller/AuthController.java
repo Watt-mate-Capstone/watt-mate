@@ -9,7 +9,7 @@ import Wattmate.DTO.LoginResponse;
 
 @RestController
 @RequestMapping("/api")
-public class AuthController {
+public class    AuthController {
 
     private final AuthService authService;
 
