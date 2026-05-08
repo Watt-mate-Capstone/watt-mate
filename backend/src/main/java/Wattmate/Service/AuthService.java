@@ -28,15 +28,13 @@ public class AuthService {
 
     @Transactional
     public void signup(SignupRequest request) {
-        if (userRepository.existsByEmail(request.getUsername())) {
-            throw new RuntimeException("이미 존재하는 이메일입니다.");
+        if (userRepository.existsByNickname(request.getNickname())) {
+            throw new RuntimeException("이미 존재하는 닉네임입니다.");
         }
 
-        // 🌟 칭호 자동 생성 로직: ID 1번이 없으면 새로 만들어 저장합니다.
         TitleMaster defaultTitle = titleMasterRepository.findById(1)
                 .orElseGet(() -> {
                     TitleMaster newTitle = new TitleMaster();
-                    // ID를 수동으로 지정할 수 없는 환경이라면 Repository 설정에 따라 달라질 수 있습니다.
                     newTitle.setTitleName("에너지 새싹");
                     return titleMasterRepository.save(newTitle);
                 });
@@ -47,7 +45,6 @@ public class AuthService {
         user.setNickname(request.getNickname());
         user.setKepcoCustNo("TEMP_" + System.currentTimeMillis());
 
-        // 가구 유형 매핑
         if (request.getHouseType() != null && request.getHouseType().contains("1인")) {
             user.setHouseholdType(HouseholdType.LIGHT);
         } else if (request.getHouseType() != null && request.getHouseType().contains("2인")) {
