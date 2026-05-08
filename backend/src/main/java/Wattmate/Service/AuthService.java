@@ -9,6 +9,7 @@ import Wattmate.Repository.TitleMasterRepository;
 import Wattmate.Repository.UserRepository;
 import Wattmate.Security.JwtTokenProvider;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AuthService {
@@ -25,21 +26,36 @@ public class AuthService {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
+    @Transactional
     public void signup(SignupRequest request) {
-
         if (userRepository.existsByEmail(request.getUsername())) {
-            throw new RuntimeException("이미 존재하는 아이디입니다.");
+            throw new RuntimeException("이미 존재하는 이메일입니다.");
         }
 
+        // 🌟 칭호 자동 생성 로직: ID 1번이 없으면 새로 만들어 저장합니다.
         TitleMaster defaultTitle = titleMasterRepository.findById(1)
-                .orElseThrow(() -> new RuntimeException("기본 칭호가 없습니다."));
+                .orElseGet(() -> {
+                    TitleMaster newTitle = new TitleMaster();
+                    // ID를 수동으로 지정할 수 없는 환경이라면 Repository 설정에 따라 달라질 수 있습니다.
+                    newTitle.setTitleName("에너지 새싹");
+                    return titleMasterRepository.save(newTitle);
+                });
 
         User user = new User();
         user.setEmail(request.getUsername());
         user.setPassword(request.getPassword());
-        user.setNickname(request.getUsername());
-        user.setKepcoCustNo("TEMP");
-        user.setHouseholdType(HouseholdType.LIGHT);
+        user.setNickname(request.getNickname());
+        user.setKepcoCustNo("TEMP_" + System.currentTimeMillis());
+
+        // 가구 유형 매핑
+        if (request.getHouseType() != null && request.getHouseType().contains("1인")) {
+            user.setHouseholdType(HouseholdType.LIGHT);
+        } else if (request.getHouseType() != null && request.getHouseType().contains("2인")) {
+            user.setHouseholdType(HouseholdType.MIDDLE);
+        } else {
+            user.setHouseholdType(HouseholdType.HEAVY);
+        }
+
         user.setEnergyTemp(36.5f);
         user.setCurrentPoint(0);
         user.setTotalPoint(0);
@@ -49,7 +65,6 @@ public class AuthService {
     }
 
     public String login(LoginRequest request) {
-
         User user = userRepository.findByEmail(request.getUsername())
                 .orElseThrow(() -> new RuntimeException("존재하지 않는 아이디입니다."));
 
