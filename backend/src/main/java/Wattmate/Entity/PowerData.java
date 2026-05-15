@@ -1,43 +1,40 @@
 package Wattmate.Entity;
 
 import jakarta.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "power_data")
+@Table(name = "PowerData")
 public class PowerData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer dataId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private static User user;
+    @Column(nullable = false)
+    private Integer userId;
 
-    @Column(name = "real_usage_kwh", nullable = false)
-    private Float realUsageKwh;
+    @Column(nullable = false)
+    private LocalDateTime recordedAt;
 
-    @Column(name = "pred_usage_kwh")
-    private Float predUsageKwh;
-
-    @Column(name = "recorded_at", nullable = false)
-    private Timestamp recordedAt;
+    private Float realUsageKwh; // 과거 실측 사용량
+    private Float predUsageKwh; // AI가 예측한 사용량
 
     public PowerData() {}
 
+    // Getters and Setters
     public Integer getDataId() { return dataId; }
     public void setDataId(Integer dataId) { this.dataId = dataId; }
 
-    public static User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
+    public Integer getUserId() { return userId; }
+    public void setUserId(Integer userId) { this.userId = userId; }
+
+    public LocalDateTime getRecordedAt() { return recordedAt; }
+    public void setRecordedAt(LocalDateTime recordedAt) { this.recordedAt = recordedAt; }
 
     public Float getRealUsageKwh() { return realUsageKwh; }
     public void setRealUsageKwh(Float realUsageKwh) { this.realUsageKwh = realUsageKwh; }
 
     public Float getPredUsageKwh() { return predUsageKwh; }
     public void setPredUsageKwh(Float predUsageKwh) { this.predUsageKwh = predUsageKwh; }
-
-    public Timestamp getRecordedAt() { return recordedAt; }
-    public void setRecordedAt(Timestamp recordedAt) { this.recordedAt = recordedAt; }
 }
