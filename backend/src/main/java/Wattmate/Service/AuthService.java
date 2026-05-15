@@ -63,13 +63,13 @@ public class AuthService {
     }
 
     public String login(LoginRequest request) {
-        User user = userRepository.findByNickname(request.getUsername())
-                .orElseThrow(() -> new RuntimeException("존재하지 않는 닉네임입니다."));
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("존재하지 않는 이메일입니다."));
 
         if (!user.getPassword().equals(request.getPassword())) {
             throw new RuntimeException("비밀번호가 일치하지 않습니다.");
         }
 
-        return jwtTokenProvider.createToken(user.getNickname());
+        return jwtTokenProvider.createToken(user.getEmail());
     }
 }
