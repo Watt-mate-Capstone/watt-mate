@@ -3,7 +3,7 @@ package Wattmate.Entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "'user'") // DB의 User 테이블과 매핑
+@Table(name = "`user`") // DB의 User 테이블과 매핑
 public class User {
 
     @Id
