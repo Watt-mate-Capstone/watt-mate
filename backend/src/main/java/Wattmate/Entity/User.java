@@ -3,7 +3,7 @@ package Wattmate.Entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "`user`")
+@Table(name = "'user'") // DB의 User 테이블과 매핑
 public class User {
 
     @Id
@@ -22,25 +22,25 @@ public class User {
     @Column(name = "kepco_cust_no", nullable = false, length = 20)
     private String kepcoCustNo;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "household_type", nullable = false)
-    private HouseholdType householdType;
+    @Column(name = "household_count", nullable = false)
+    private Integer householdCount;
 
-    @Column(name = "energy_temp", nullable = false)
-    private Float energyTemp;
+    @Column(name = "energy_temp")
+    private Float energyTemp = 36.5f; // 기본값
 
-    @Column(name = "current_point", nullable = false)
-    private Integer currentPoint;
+    @Column(name = "current_point")
+    private Integer currentPoint = 0;
 
-    @Column(name = "total_point", nullable = false)
-    private Integer totalPoint;
+    @Column(name = "total_point")
+    private Integer totalPoint = 0;
 
-    @ManyToOne
-    @JoinColumn(name = "title_id")
-    private TitleMaster title;
+    @Column(name = "title_id")
+    private Integer titleId;
 
+    // 기본 생성자
     public User() {}
 
+    // Getters and Setters
     public Integer getUserId() { return userId; }
     public void setUserId(Integer userId) { this.userId = userId; }
 
@@ -56,8 +56,8 @@ public class User {
     public String getKepcoCustNo() { return kepcoCustNo; }
     public void setKepcoCustNo(String kepcoCustNo) { this.kepcoCustNo = kepcoCustNo; }
 
-    public HouseholdType getHouseholdType() { return householdType; }
-    public void setHouseholdType(HouseholdType householdType) { this.householdType = householdType; }
+    public Integer getHouseholdCount() { return householdCount; }
+    public void setHouseholdCount(Integer householdCount) { this.householdCount = householdCount; }
 
     public Float getEnergyTemp() { return energyTemp; }
     public void setEnergyTemp(Float energyTemp) { this.energyTemp = energyTemp; }
@@ -68,6 +68,6 @@ public class User {
     public Integer getTotalPoint() { return totalPoint; }
     public void setTotalPoint(Integer totalPoint) { this.totalPoint = totalPoint; }
 
-    public TitleMaster getTitle() { return title; }
-    public void setTitle(TitleMaster title) { this.title = title; }
+    public Integer getTitleId() { return titleId; }
+    public void setTitleId(Integer titleId) { this.titleId = titleId; }
 }

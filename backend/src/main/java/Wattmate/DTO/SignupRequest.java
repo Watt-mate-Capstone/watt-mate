@@ -1,20 +1,24 @@
 package Wattmate.DTO;
 
 public class SignupRequest {
-    private String username;    // 이메일
+    private String email;           // 기존 username 대신 email로 명칭 통일
     private String password;
-    private String nickname;    // 사용자 이름
-    private String houseType;   // 가구 유형
-    private String region;
+    private String nickname;
+    private String kepcoCustNo;     // 한전 고객번호 (필수)
+    private Integer householdCount; // 가구원 수 (숫자 타입)
 
-    public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
+
     public String getNickname() { return nickname; }
     public void setNickname(String nickname) { this.nickname = nickname; }
-    public String getHouseType() { return houseType; }
-    public void setHouseType(String houseType) { this.houseType = houseType; }
-    public String getRegion() { return region; }
-    public void setRegion(String region) { this.region = region; }
+
+    public String getKepcoCustNo() { return kepcoCustNo; }
+    public void setKepcoCustNo(String kepcoCustNo) { this.kepcoCustNo = kepcoCustNo; }
+
+    public Integer getHouseholdCount() { return householdCount; }
+    public void setHouseholdCount(Integer householdCount) { this.householdCount = householdCount; }
 }

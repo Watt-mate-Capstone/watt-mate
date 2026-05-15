@@ -2,7 +2,6 @@ package Wattmate.Service;
 
 import Wattmate.DTO.LoginRequest;
 import Wattmate.DTO.SignupRequest;
-import Wattmate.Entity.HouseholdType;
 import Wattmate.Entity.TitleMaster;
 import Wattmate.Entity.User;
 import Wattmate.Repository.TitleMasterRepository;
@@ -28,6 +27,12 @@ public class AuthService {
 
     @Transactional
     public void signup(SignupRequest request) {
+        System.out.println("EMAIL = " + request.getEmail());
+
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new RuntimeException("이미 존재하는 이메일입니다.");
+        }
+
         if (userRepository.existsByNickname(request.getNickname())) {
             throw new RuntimeException("이미 존재하는 닉네임입니다.");
         }
@@ -36,27 +41,23 @@ public class AuthService {
                 .orElseGet(() -> {
                     TitleMaster newTitle = new TitleMaster();
                     newTitle.setTitleName("에너지 새싹");
+                    newTitle.setMinRank(0);
+                    newTitle.setMaxRank(999999);
+                    newTitle.setColorCode("#00C853");
                     return titleMasterRepository.save(newTitle);
                 });
 
         User user = new User();
-        user.setEmail(request.getUsername());
+        user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
         user.setNickname(request.getNickname());
-        user.setKepcoCustNo("TEMP_" + System.currentTimeMillis());
-
-        if (request.getHouseType() != null && request.getHouseType().contains("1인")) {
-            user.setHouseholdType(HouseholdType.LIGHT);
-        } else if (request.getHouseType() != null && request.getHouseType().contains("2인")) {
-            user.setHouseholdType(HouseholdType.MIDDLE);
-        } else {
-            user.setHouseholdType(HouseholdType.HEAVY);
-        }
+        user.setKepcoCustNo(request.getKepcoCustNo());
+        user.setHouseholdCount(request.getHouseholdCount());
 
         user.setEnergyTemp(36.5f);
         user.setCurrentPoint(0);
         user.setTotalPoint(0);
-        user.setTitle(defaultTitle);
+        user.setTitleId(defaultTitle.getTitleId());
 
         userRepository.save(user);
     }
