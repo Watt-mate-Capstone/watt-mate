@@ -9,7 +9,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/power")
-@CrossOrigin(origins = "*") // 테스트용 전체 허용
+@CrossOrigin(origins = "*")
 public class PowerDataController {
 
     private final PowerDataRepository powerDataRepository;
@@ -20,27 +20,26 @@ public class PowerDataController {
         this.powerDataService = powerDataService;
     }
 
-    // 파일 업로드 및 분석 (기존)
     @PostMapping("/upload")
     public Map<String, Object> upload(@RequestParam("userId") Integer userId, @RequestParam("file") MultipartFile file) throws Exception {
         return powerDataService.analyzeAndSave(userId, file);
     }
 
-    // 시간별 조회
     @GetMapping("/hourly")
     public List<PowerData> getHourly(@RequestParam Integer userId, @RequestParam String date) {
+        // Repository의 findHourlyUsage 호출
         return powerDataRepository.findHourlyUsage(userId, date);
     }
 
-    // 일별 조회
     @GetMapping("/daily")
     public List<Map<String, Object>> getDaily(@RequestParam Integer userId, @RequestParam Integer month, @RequestParam Integer year) {
+        // Repository의 findDailyUsage 호출
         return powerDataRepository.findDailyUsage(userId, month, year);
     }
 
-    // 월별 조회
     @GetMapping("/monthly")
     public List<Map<String, Object>> getMonthly(@RequestParam Integer userId, @RequestParam Integer year) {
+        // Repository의 findMonthlyUsage 호출 (이제 에러 안 남!)
         return powerDataRepository.findMonthlyUsage(userId, year);
     }
 }
