@@ -17,7 +17,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# --- [1] AI 모델 및 스케일러 로드 ---
+# --- [1] AI 모델 및 스케일러 로드 (유지) ---
 try:
     MODEL = tf.keras.models.load_model('watt_mate_best_model.keras', compile=False)
     SCALER = joblib.load('watt_mate_scaler.pkl')
@@ -26,13 +26,11 @@ except Exception as e:
     MODEL, SCALER = None, None
     print(f"⚠️ 로드 실패: {e}")
 
-# --- [2] 데이터 전처리 및 재구조화 ---
+# --- [2] 데이터 전처리 로직 (유지) ---
 def preprocess(df):
     hourly_cols = [f"{i:02d}:00" for i in range(1, 25)]
-    # Wide -> Long 변환
     df_melted = df.melt(id_vars=['날짜'], value_vars=hourly_cols, var_name='시간', value_name='kWh')
     df_melted['hour_int'] = df_melted['시간'].str.split(':').str[0].astype(int)
-    # 정렬 (날짜와 시간 순으로)
     df_melted = df_melted.sort_values(by=['날짜', 'hour_int']).reset_index(drop=True)
     df_melted['kWh'] = pd.to_numeric(df_melted['kWh'], errors='coerce').fillna(0)
     return df_melted
@@ -40,19 +38,19 @@ def preprocess(df):
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
     if not MODEL or not SCALER:
-        raise HTTPException(status_code=500, detail="AI 모델이 로드되지 않았습니다.")
+        raise HTTPException(status_code=500, detail="AI 모델 로드 필요")
 
     try:
         contents = await file.read()
-        # --- [3] 인코딩 대응 ---
+        # --- [3] 인코딩 대응 (유지) ---
         try:
             df_raw = pd.read_csv(io.BytesIO(contents), encoding='cp949')
         except:
             df_raw = pd.read_csv(io.BytesIO(contents), encoding='utf-8')
             
-        df_proc = preprocess(df_raw) # 전체 4개월 데이터
+        df_proc = preprocess(df_raw)
 
-        # --- [4] 전체 시간별 실측 데이터 추출 (DB 저장용) ---
+        # --- [4] 4개월 전체 실측 데이터 (백엔드 요구사항: hourlyHistory) ---
         hourly_history = []
         for _, row in df_proc.iterrows():
             hourly_history.append({
@@ -60,35 +58,31 @@ async def predict(file: UploadFile = File(...)):
                 "usage": float(row['kWh'])
             })
 
-        # --- [5] 재귀적 예측 로직 (2주간 = 336시간 예측) ---
+        # --- [5] 2주(336시간) 재귀적 예측 로직 ---
         scaled_data = SCALER.transform(df_proc[['kWh']])
-        
-        # 모델의 입력 윈도우 크기(24시간) 유지
         current_batch = scaled_data[-24:].reshape(1, 24, 1)
         predictions_scaled = []
 
-        # 🌟 변경 포인트: 24회 반복 -> 336회 반복 (14일 * 24시간)
+        # 🌟 2주치(14일 * 24시간) 예측
         prediction_hours = 14 * 24 
-        
+
         for _ in range(prediction_hours):
-            # 다음 1시간 예측
             next_pred = MODEL.predict(current_batch, verbose=0)
             val = next_pred[0, 0] if next_pred.ndim > 1 else next_pred[0]
             predictions_scaled.append(val)
             
-            # 윈도우 업데이트: 가장 오래된 값을 버리고 방금 예측한 값을 끝에 추가
             next_val_reshaped = np.array(val).reshape(1, 1, 1)
             current_batch = np.append(current_batch[:, 1:, :], next_val_reshaped, axis=1)
 
-        # 원래 단위로 복구 (inverse_transform)
+        # 원래 단위 복구
         predictions_rescaled = SCALER.inverse_transform(np.array(predictions_scaled).reshape(-1, 1)).flatten().tolist()
-        
-        # 음수 제거 및 타입 변환
-        next_2weeks_pred = [max(0, float(v)) for v in predictions_rescaled]
+        next_preds = [max(0, float(v)) for v in predictions_rescaled]
 
+        # 🌟 중요: 백엔드를 안 건드리기 위해 키 이름을 'next24hPred'로 유지합니다.
+        # 데이터가 24개든 336개든 백엔드는 이 이름표를 찾습니다.
         return {
-            "hourlyHistory": hourly_history,     # 4개월 전체 실측 데이터
-            "next2WeeksPred": next_2weeks_pred,  # 미래 2주(336시간) 예측 데이터 🌟 키 이름 변경
+            "hourlyHistory": hourly_history, 
+            "next24hPred": next_preds, 
             "status": "Success"
         }
         
