@@ -62,7 +62,8 @@ public class SecurityConfig {
         // 리액트 개발 서버 주소 허용
         configuration.setAllowedOrigins(Arrays.asList(
                 "http://localhost:5173",
-                "https://watt-mate-capstone.github.io"
+                "https://watt-mate-capstone.github.io" ,
+                "https://watt-mate.vercel.app"
         ));
 
         // 허용할 HTTP 메서드
