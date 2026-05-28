@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
-
+@RequestMapping("/api/users") // 1. 기본 베이스 주소를 /api/users 로 설정
 public class UserController {
 
     private final UserRepository userRepository;
@@ -19,7 +18,7 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/users")
+    @GetMapping //
     public List<User> getUsers() {
         return userRepository.findAll();
     }
