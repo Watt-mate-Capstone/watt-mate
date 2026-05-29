@@ -61,7 +61,7 @@ public class PointRewardService {
 
                 // 3. point_log 테이블에 영수증(INSERT) 강제 적재
                 PointLog log = new PointLog();
-                log.setUserId(user.getUserId());
+                log.setUser(user);
                 log.setAmount(rewardPoint);
                 log.setLogType(LogType.valueOf("SAVE")); // 적립
                 log.setDescription("월간 절약 리그 리워드 지급 (" + rankTier + " - " + rank + "위)");
