@@ -8,6 +8,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_id")
     private Integer productId;
 
     @Column(name = "product_name", nullable = false, length = 100)
@@ -16,14 +17,14 @@ public class Product {
     @Column(name = "price_point", nullable = false)
     private Integer pricePoint;
 
-    @Column(nullable = false, length = 50)
+    @Column(name = "category", length = 50)
     private String category;
 
-    @Column(name = "image_url", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "image_url", columnDefinition = "TEXT")
     private String imageUrl;
 
-    @Column(nullable = false)
-    private Integer stock;
+    @Column(name = "stock")
+    private Integer stock = 999;
 
     public Product() {}
 

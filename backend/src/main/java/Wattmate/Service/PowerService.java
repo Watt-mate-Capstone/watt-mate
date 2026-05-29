@@ -40,7 +40,6 @@ public class PowerService {
             // 3. 파일 데이터를 바디에 담기
             MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
             body.add("file", file.getResource());
-
             HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
             // 4. FastAPI 호출 로그 출력
