@@ -1,13 +1,9 @@
 package Wattmate.Entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.sql.Timestamp;
 
-@Setter
-@Getter
 @Entity
 @Table(name = "point_log")
 public class PointLog {
@@ -33,8 +29,41 @@ public class PointLog {
     @Column(name = "created_at", nullable = false)
     private Timestamp createdAt;
 
-    public PointLog() {}
+    public Integer getLogId() { return logId; }
+    public void setLogId(Integer logId) { this.logId = logId; }
 
-    public void setUserId(Integer userId) {
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    public LogType getLogType() {
+        return logType;
+    }
+
+    public void setLogType(LogType logType) {
+        this.logType = logType;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 }
