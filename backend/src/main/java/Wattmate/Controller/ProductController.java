@@ -40,12 +40,6 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
-    @GetMapping("/point-logs")
-    public ResponseEntity<List<PointLog>> getAllPointLogs() {
-        List<PointLog> logs = pointLogRepository.findAll();
-        return ResponseEntity.ok(logs);
-    }
-
     @PostMapping("/purchase")
     @Transactional
     public ResponseEntity<?> purchaseProduct(@RequestBody Map<String, Object> request) {
