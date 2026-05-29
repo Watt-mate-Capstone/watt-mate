@@ -40,9 +40,16 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
+    @GetMapping("/point-logs")
+    public ResponseEntity<List<PointLog>> getAllPointLogs() {
+        List<PointLog> logs = pointLogRepository.findAll();
+        return ResponseEntity.ok(logs);
+    }
+
     @PostMapping("/purchase")
     @Transactional
     public ResponseEntity<?> purchaseProduct(@RequestBody Map<String, Object> request) {
+
         Number userIdNumber = (Number) request.get("userId");
         Number productIdNumber = (Number) request.get("productId");
 
@@ -76,7 +83,7 @@ public class ProductController {
         PointLog log = new PointLog();
         log.setUserId(user.getUserId());
         log.setAmount(product.getPricePoint());
-        log.setLogType(LogType.valueOf("SPEND"));
+        log.setLogType(LogType.SPEND);
         log.setDescription(product.getProductName() + " 구매");
         log.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
 

@@ -21,7 +21,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class PowerService {
+public class    PowerService {
 
     // RestTemplate은 빈으로 등록해서 사용하는 것이 좋지만, 우선 직접 생성하여 사용합니다.
     private final RestTemplate restTemplate = new RestTemplate();
