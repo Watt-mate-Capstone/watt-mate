@@ -3,7 +3,7 @@
 <h3 align="center">AI 기반 전력 사용량 분석 및 에너지 절약 리워드 플랫폼</h3>
 
 <div align="center">
-  <img src="./images/WATTMATE.png" alt="Watt Mate Logo" width="120" />
+  <img src="./images/WATTMATE.png" alt="Watt Mate Logo" width="1200" />
 </div>
 
 <br />
